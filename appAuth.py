@@ -31,10 +31,3 @@ def getPercDiff(ticker, duration):
     data = getMultiDay(ticker, duration)
     sz = data.size
     return ((data[0][4] - data[sz-1][4]) / data[sz-1][4])
-
-if __name__ == "__main__":
-    pdb.set_trace()
-    data = getTotalDiff("MSFT", 5)
-    print(data)
-
-
