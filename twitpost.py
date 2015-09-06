@@ -105,12 +105,12 @@ class TweetGenerator:
             perc = self.percent_list[ind]
 
             if (perc > 0 and perc < 0.5):
-                self.tweet_list.append("{0} (ticker) experienced a {1} percent increase yesterday; today {2}".format(st, perc, random.sample(TweetGenerator.pos_g1, 1)[0]))
+                self.tweet_list.append("{0} (ticker) experienced a {1} percent increase yesterday; today {2}".format(st, ("%.3f" % perc), random.sample(TweetGenerator.pos_g1, 1)[0]))
             elif (perc >= 0.5 and perc < 1):
                 self.tweet_list.append("After a good day, {0} (ticker) should {1} in trading today.".format(st, random.sample(TweetGenerator.pos_g2, 1)[0]))
 
             elif (perc >= 1 and perc < 2):
-                self.tweet_list.append("Following a strong {0} percent boost, we are seeing {1} today for stock {2} (ticker)".format(perc, random.sample(TweetGenerator.pos_g3, 1)[0], st))
+                self.tweet_list.append("Following a strong {0} percent boost, we are seeing {1} today for stock {2} (ticker)".format(("%.3f" % perc), random.sample(TweetGenerator.pos_g3, 1)[0], st))
 
             elif (perc >= 2 and perc < 4):
                 self.tweet_list.append("{0} to avoid losses on {1} (ticker) during trading today.".format(random.sample(TweetGenerator.pos_g4, 1)[0], st))
@@ -119,13 +119,13 @@ class TweetGenerator:
                 self.tweet_list.append("{0} (ticker) saw a blockbuster day, so we see {1} today.".format(st, random.sample(TweetGenerator.pos_g5, 1)[0]))
 
             elif perc <= 0 and perc > -0.5:
-                self.tweet_list.append("{0} (ticker) experienced a {1} percent decrease yesterday; today {2}".format(st, perc, random.sample(TweetGenerator.neg_g1, 1)[0]))
+                self.tweet_list.append("{0} (ticker) experienced a {1} percent decrease yesterday; today {2}".format(st, ("%.3f" % perc), random.sample(TweetGenerator.neg_g1, 1)[0]))
 
             elif perc <= -0.5 and perc > -1:
                 self.tweet_list.append("{0} (ticker) saw a slow day, so we see {1} today.".format(st, random.sample(TweetGenerator.neg_g2, 1)[0]))
 
             elif perc <= -1 and perc > -2:
-                self.tweet_list.append("Following a weak {0} percent drop, we are seeing {1} for stock today.".format(perc, random.sample(TweetGenerator.neg_g3, 1)[0]))
+                self.tweet_list.append("Following a weak {0} percent drop, we are seeing {1} for stock today.".format(("%.3f" % perc), random.sample(TweetGenerator.neg_g3, 1)[0]))
 
             elif perc <= -2 and perc > -4:
                 self.tweet_list.append("{0} during trading today to capitalize on gains for {1} (ticker)".format(random.sample(TweetGenerator.neg_g4, 1)[0], st))

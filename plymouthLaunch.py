@@ -47,12 +47,15 @@ if __name__ == "__main__":
 
     while True:  # Run the bot for all time (or until program exited)
 
-        tcur = datetime.utcnow().replace(tzinfo = pytz.utc)  # get the current time (UTC)
+        tweets_done = False
 
-        pdb.set_trace()
+        tcur = datetime.utcnow().replace(tzinfo = pytz.utc)  # get the current time (UTC)
+        print("Checking current time...")
 
         # 2.5 hours pre-trading day in UCT
-        if (tcur.hour >= 11 and tcur.hour < 13) or (tcur.hour == 13 and tcur.minute < 30):
+        if (not tweets_done and (tcur.hour >= 11 and tcur.hour < 13) or (tcur.hour == 13 and tcur.minute < 30)):
+
+            print("Entering Pre-trading operations...")
 
             totdji = totDJI(ticks)
             dif = [appAuth.getPercDiff(t, 7) for t in ticks]
@@ -76,10 +79,17 @@ if __name__ == "__main__":
             # POST Tweets at semi-random intervals
             for tw in done_tweets:
                 twitter.tweet(tw)
+                print("Tweet posted.")
                 time.sleep(random.randint(120,150))
+
+            tweets_done = True
 
         # Trading day and normal business hours
         elif (tcur.hour >= 14 and tcur.hour < 20) :
+
+            tweets_done = False
+
+            print("Stealth operations to build influence...")
 
             # Random action
             if (random.randint(0,30) < 2):
