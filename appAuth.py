@@ -1,15 +1,20 @@
 import Quandl
 import numpy as np
 from datetime import date, timedelta
-import pdb
+import pdb, pickle
 
 def getMultiDay(ticker, duration):
     curr = date.today()  # Today's date
     past = curr - timedelta(days=duration)  # get a past date
 
+    file = open("authtoken.p", 'rb')
+    token = pickle.load(file)
+    file.close()
+
+
     # Craft the Quandl Request
     data = Quandl.get(('WIKI/' + ticker),
-                      authtoken='36nnnTjzg2rMFxicHvnb',
+                      authtoken=token,
                       trim_start=str(past),
                       trim_end=str(curr),
                       exclude_headers='true',
