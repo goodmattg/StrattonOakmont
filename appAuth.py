@@ -9,7 +9,7 @@ def getMultiDay(ticker, duration):
 
     # Craft the Quandl Request
     data = Quandl.get(('WIKI/' + ticker),
-                      authtoken='xxxxxxxxxxxxxx',
+                      authtoken='36nnnTjzg2rMFxicHvnb',
                       trim_start=str(past),
                       trim_end=str(curr),
                       exclude_headers='true',

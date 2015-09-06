@@ -1,5 +1,5 @@
 # General Scheduling in UCT (Zulu military time)
-import pytz, random, pdb
+import pytz, random, pdb, time
 import appAuth, twitpost
 from datetime import datetime
 
@@ -38,8 +38,6 @@ def totDJI(ticks):
     return tot
 
 
-
-
 if __name__ == "__main__":
 
     twitter = twitpost.TwitterAPI()  # Initialize Twitter API interface
@@ -50,6 +48,8 @@ if __name__ == "__main__":
     while True:  # Run the bot for all time (or until program exited)
 
         tcur = datetime.utcnow().replace(tzinfo = pytz.utc)  # get the current time (UTC)
+
+        pdb.set_trace()
 
         # 2.5 hours pre-trading day in UCT
         if (tcur.hour >= 11 and tcur.hour < 13) or (tcur.hour == 13 and tcur.minute < 30):
@@ -76,7 +76,7 @@ if __name__ == "__main__":
             # POST Tweets at semi-random intervals
             for tw in done_tweets:
                 twitter.tweet(tw)
-                sleep(random.randint(120,150))
+                time.sleep(random.randint(120,150))
 
         # Trading day and normal business hours
         elif (tcur.hour >= 14 and tcur.hour < 20) :
@@ -86,7 +86,7 @@ if __name__ == "__main__":
                 # Isolate a random friend
                 rand_friend = random.sample(set(twitter.api.friends_ids()), 1)[0]
                 # Isolated friend's last tweet ID
-                last_tweet = twitter.api.user_timeline(rand_friend, count = 1)
+                last_tweet = twitter.api.user_timeline(rand_friend, count = 1)[0].id
 
                 # Favorite/Retweet friend's last post
                 if (random.randint(0,1)==0):
@@ -94,10 +94,11 @@ if __name__ == "__main__":
                 else:
                     twitter.api.retweet(last_tweet)
 
-            sleep(60)  # sleep for a minute
+            time.sleep(60)  # sleep for a minute
 
 
         # Non-standard hours. No activity.
         else:
-            sleep(60)  # sleep for a minute
+            print("No activity...")
+            time.sleep(60)  # sleep for a minute
 
