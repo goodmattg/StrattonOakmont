@@ -146,21 +146,10 @@ class TweetGenerator:
 
 
 if __name__ == "__main__":
-    # twitter = TwitterAPI()
-    # pdb.set_trace()
-    # twitter.tweet("I'm posting a tweet!")
 
 
 
-    # scheduler = sched.scheduler(time.time, time.sleep)
-    # def print_event(name):
-    #     print('EVENT: {0} {1}'.format(time.time(), name))
 
-    # print('START: {0}'.format(time.time()))
-    # scheduler.enter(2, 1, print_event, ('first',))
-    # scheduler.enter(4, 1, print_event, ('second',))
-
-    # scheduler.run()
 
 
     gen = TweetGenerator([-1.1, 1.1, 0.3, -2.2, -0.4, 5], ["AAPL", "GOOG", "MSFT", "MMM", "CME", "CMI"])
