@@ -140,24 +140,12 @@ class TweetGenerator:
     def getTweetList(self):
         return self.tweet_list
 
+    # gen = TweetGenerator([-1.1, 1.1, 0.3, -2.2, -0.4, 5], ["AAPL", "GOOG", "MSFT", "MMM", "CME", "CMI"])
+    # gen.generateTweets()
+    # tweet_list = gen.getTweetList()
 
-
-
-
-
-if __name__ == "__main__":
-
-
-
-
-
-
-    gen = TweetGenerator([-1.1, 1.1, 0.3, -2.2, -0.4, 5], ["AAPL", "GOOG", "MSFT", "MMM", "CME", "CMI"])
-    gen.generateTweets()
-    tweet_list = gen.getTweetList()
-
-    twitter = TwitterAPI()
-    twitter.prep()
-    done_tweets = twitter.assignTweetsToFriends(tweet_list)
-    for d in done_tweets:
-        twitter.tweet(d)
+    # twitter = TwitterAPI()
+    # twitter.prep()
+    # done_tweets = twitter.assignTweetsToFriends(tweet_list)
+    # for d in done_tweets:
+    #     twitter.tweet(d)

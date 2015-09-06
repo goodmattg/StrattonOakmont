@@ -3,6 +3,21 @@ import pytz, random
 import appAuth, twitpost
 from datetime import datetime
 
+def changeSP():
+    ticks = list()
+    f = open('tickersSP.txt', 'r')
+    for line in f:
+        ticks.append(line)
+    f.close()
+    return ticks
+
+def changeDJI():
+    ticks = list()
+    f = open('tickersDJI.txt', 'r')
+    for line in f:
+        ticks.append(line)
+    f.close()
+    return ticks
 
     # scheduler = sched.scheduler(time.time, time.sleep)
     # def print_event(name):
@@ -34,14 +49,22 @@ while True:
     if (tcur.hour >= 11 and tcur.hour < 13) or (tcur.hour == 13 and tcur.minute < 30):
         twitGen = TweetGenerator([],[])
 
-
-
-
     # not in trading day
     else:
+        if (random.randint(0,15) < 2):
+            rand_friend = random.sample(set(twitter.api.friends_ids()), 1)[0]  # get a random friend
+            last_tweet = twitter.api.user_timeline(rand_friend, count = 1)  # friend's last tweet ID
 
-        # IMPLEMENT RANDOM TWEET OR FAVORITE HERE
-        sleep(random.randrange(1800,3600,10))
+            if (random.randint(0,1)==0):
+                twitter.api.create_favorite(last_tweet)  # favorite friend's tweet
+            else:
+                twitter.api.retweet(last_tweet)  # retweet friend's tweet
+
+
+
+            # IMPLEMENT RANDOM TWEET OR FAVORITE HERE
+        else:
+            sleep(random.randrange(60))
 
 
     sleep(60)  # sleep for a minute
