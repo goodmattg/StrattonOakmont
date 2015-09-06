@@ -1,1 +1,5 @@
 authtoken.p
+access_token.p
+access_token_secret.p
+consumer_key.p
+consumer_secret.p
